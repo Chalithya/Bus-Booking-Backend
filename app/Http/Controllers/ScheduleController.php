@@ -12,6 +12,8 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         return Schedule::all();
@@ -23,9 +25,20 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'bus_route_id'=> 'required',
+                'direction'=> 'required',
+                'start_timestamp'=> 'required',
+                'end_timestamp'=> 'required'
+        ]);
+
+        return Schedule::create($request->all());
     }
 
     /**
@@ -36,7 +49,7 @@ class ScheduleController extends Controller
      */
     public function show($id)
     {
-        //
+        return Schedule::find($id);
     }
 
     /**
@@ -48,7 +61,9 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $schedule = Schedule::find($id);
+        $schedule->update($request->all());
+        return $schedule;
     }
 
     /**
@@ -59,6 +74,7 @@ class ScheduleController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Schedule::destroy($id);
+         return $id;
     }
 }
