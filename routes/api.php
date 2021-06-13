@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,9 @@ use App\Http\Controllers\ScheduleController;
 
 //Public routes
 
-//
+Route::post('/register',[AuthController::class, 'register']);
+Route::post('/login',[AuthController::class, 'login']);
+
 
 
 //Other routes which should  be added to admin
@@ -30,6 +33,8 @@ Route::post('/schedules{id}',[ScheduleController::class, 'destroy']);
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/schedules', [ScheduleController::class, 'index']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
 
 });
 
