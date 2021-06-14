@@ -32,7 +32,9 @@ Route::post('/schedules{id}',[ScheduleController::class, 'destroy']);
 
 //Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/schedules', [ScheduleController::class, 'index']);
+
+    Route::get('/schedules', [ScheduleController::class, 'index']);     //view schedules
+
     Route::post('/logout', [AuthController::class, 'logout']);
 
 
